@@ -9,7 +9,6 @@ app = typer.Typer()
 @app.callback()
 def bar():
     """The bar command"""
-    pass
 
 
 @app.command()

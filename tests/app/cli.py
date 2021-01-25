@@ -18,7 +18,6 @@ def cli():
     """
     Main entrypoint for this dummy program
     """
-    pass
 
 
 if __name__ == "__main__":

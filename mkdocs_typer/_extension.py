@@ -2,7 +2,6 @@
 # Licensed under the Apache license (see LICENSE)
 from typing import Any, List, Iterator
 
-import markdown
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 

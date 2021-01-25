@@ -1,6 +1,6 @@
 # All rights reserved
 # Licensed under the Apache license (see LICENSE)
-from typing import Iterator, List, Optional, cast
+from typing import Iterator, List, Optional
 
 import typer
 import click
@@ -33,7 +33,7 @@ def _recursively_make_command_docs(
         yield from _recursively_make_command_docs(command.name, command, parent=ctx, level=level + 1)
 
 
-def _get_sub_commands(command: typer.main.TyperCommand, ctx: typer.Context) -> List[typer.main.Typer]:
+def _get_sub_commands(command: click.Command, ctx: typer.Context) -> List[click.Command]:
     """Return subcommands of a Typer command."""
     subcommands = getattr(command, "commands", {})
     if subcommands:
@@ -72,7 +72,7 @@ def _make_description(ctx: click.Context) -> Iterator[str]:
         yield ""
 
 
-def _make_usage(ctx: typer.Context) -> Iterator[str]:
+def _make_usage(ctx: click.Context) -> Iterator[str]:
     """Create the Markdown lines from the command usage string."""
 
     # Gets the usual 'Usage' string without the prefix.
@@ -83,7 +83,7 @@ def _make_usage(ctx: typer.Context) -> Iterator[str]:
 
     # Generate the full usage string based on parents if any, i.e. `root sub1 sub2 ...`.
     full_path = []
-    current: Optional[typer.Context] = ctx
+    current: Optional[click.Context] = ctx
     while current is not None:
         name = current.command.name
         if name is None:
@@ -105,7 +105,7 @@ def _make_usage(ctx: typer.Context) -> Iterator[str]:
 def _make_options(ctx: typer.Context) -> Iterator[str]:
     """Create the Markdown lines describing the options for the command."""
     formatter = ctx.make_formatter()
-    typer.main.TyperCommand.format_options(ctx.command, ctx, formatter)
+    click.Command.format_options(ctx.command, ctx, formatter)
     # First line is redundant "Options"
     # Last line is `--help`
     option_lines = formatter.getvalue().splitlines()[1:-1]
