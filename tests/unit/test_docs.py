@@ -3,10 +3,8 @@
 from textwrap import dedent
 
 import typer
-import pytest
 
 from mkdocs_typer._docs import make_command_docs
-from mkdocs_typer._exceptions import MkDocsTyperException
 
 
 app = typer.Typer(add_completion=False)
@@ -52,60 +50,3 @@ def test_depth():
 def test_prog_name():
     output = "\n".join(make_command_docs("hello-world", app)).strip()
     assert output == HELLO_EXPECTED.replace("# hello", "# hello-world")
-
-
-# TODO: multicommaands
-# class MultiCLI(click.MultiCommand):
-#     def list_commands(self, ctx):
-#         return ["single-command"]
-#
-#     def get_command(self, ctx, name):
-#         return hello
-#
-#
-# def test_custom_multicommand():
-#     """
-#     Custom `MultiCommand` objects are supported (i.e. not just `Group` multi-commands).
-#     """
-#
-#     multi = MultiCLI("multi", help="Multi help")
-#
-#     expected = dedent(
-#         """
-#         # multi
-#
-#         Multi help
-#
-#         Usage:
-#
-#         ```
-#         multi [OPTIONS] COMMAND [ARGS]...
-#         ```
-#
-#         ## hello
-#
-#         Hello, world!
-#
-#         Usage:
-#
-#         ```
-#         multi hello [OPTIONS]
-#         ```
-#
-#         Options:
-#
-#         ```
-#           -d, --debug TEXT  Include debug output
-#         ```
-#         """
-#     ).lstrip()
-#
-#     output = "\n".join(make_command_docs("multi", multi))
-#     assert output == expected
-#
-#
-# def test_custom_multicommand_name():
-#     """Custom multi commands must be given a name."""
-#     multi = MultiCLI()
-#     with pytest.raises(MkDocsTyperException):
-#         list(make_command_docs("multi", multi))

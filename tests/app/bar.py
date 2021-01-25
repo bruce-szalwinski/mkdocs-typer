@@ -13,6 +13,8 @@ def bar():
 
 
 @app.command()
-def hello(count: int = typer.Option(default=1, help="Number of greetings.", show_default=False),
-          name: str = typer.Option(..., prompt="Your name", help="The person to greet.")):
+def hello(
+    count: int = typer.Option(default=1, help="Number of greetings.", show_default=False),
+    name: str = typer.Option(..., prompt="Your name", help="The person to greet."),
+):
     """Simple program that greets NAME for a total of COUNT times."""

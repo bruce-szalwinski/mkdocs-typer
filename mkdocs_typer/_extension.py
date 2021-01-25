@@ -2,6 +2,7 @@
 # Licensed under the Apache license (see LICENSE)
 from typing import Any, List, Iterator
 
+import markdown
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 
@@ -45,8 +46,7 @@ class MKTyperExtension(Extension):
     def extendMarkdown(self, md: Any) -> None:
         md.registerExtension(self)
         processor = TyperProcessor(md.parser)
-        # TODO: 141?
-        md.preprocessors.register(processor, "mk_typer", 141)
+        md.preprocessors.register(processor, "mk_typer", 142)
 
 
 def makeExtension() -> Extension:
