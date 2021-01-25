@@ -10,7 +10,7 @@ my_app.add_typer(bar.app, name="bar")
 
 @my_app.command()
 def foo():
-    pass
+    pass  # pragma: no cover
 
 
 @my_app.callback()
@@ -18,7 +18,3 @@ def cli():
     """
     Main entrypoint for this dummy program
     """
-
-
-if __name__ == "__main__":
-    my_app()
