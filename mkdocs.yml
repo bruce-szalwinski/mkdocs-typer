@@ -1,0 +1,9 @@
+# NOTE: this is not an actual docs site for `mkdocs-typer`, but rather a
+# demo site to demonstrate the abilities of `mkdocs-typer`.
+site_name: mkdocs-typer example
+theme: readthedocs
+
+docs_dir: example
+
+markdown_extensions:
+  - mkdocs-typer
