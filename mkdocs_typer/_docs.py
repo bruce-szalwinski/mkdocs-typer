@@ -42,15 +42,6 @@ def _get_sub_commands(command: click.Command, ctx: typer.Context) -> List[click.
     if not isinstance(command, click.MultiCommand):
         return []
 
-    subcommands = []
-
-    for name in command.list_commands(ctx):
-        subcommand = command.get_command(ctx, name)
-        assert subcommand is not None
-        subcommands.append(subcommand)
-
-    return subcommands
-
 
 def _make_title(prog_name: str, level: int) -> Iterator[str]:
     """Create the first markdown lines describing a command."""
