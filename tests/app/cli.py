@@ -4,6 +4,8 @@ import typer
 
 from tests.app import bar
 
+NOT_A_COMMAND = "not-a-command"
+
 my_app = typer.Typer(add_completion=False)
 my_app.add_typer(bar.app, name="bar")
 
