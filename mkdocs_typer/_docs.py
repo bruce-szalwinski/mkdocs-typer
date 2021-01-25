@@ -38,8 +38,10 @@ def _get_sub_commands(command: click.Command, ctx: typer.Context) -> List[click.
     subcommands = getattr(command, "commands", {})
     if subcommands:
         return subcommands.values()
+    else:
+        # MultiCommand not created by Typer.
+        # See https://github.com/DataDog/mkdocs-click/blob/master/mkdocs_click/_docs.py#L45
 
-    if not isinstance(command, click.MultiCommand):
         return []
 
 
