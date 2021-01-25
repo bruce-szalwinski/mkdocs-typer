@@ -1,6 +1,6 @@
 # mkdocs-typer
 
-![Tests](https://github.com/bruce-szalwinski/mkdocs-typer/workflows/Tests/badge.svg?branch=master)
+![Tests](https://github.com/bruce-szalwinski/mkdocs-typer/workflows/Tests/badge.svg?branch=main)
 ![Python versions](https://img.shields.io/pypi/pyversions/mkdocs-typer.svg)
 [![Package version](https://badge.fury.io/py/mkdocs-typer.svg)](https://pypi.org/project/mkdocs-typer)
 
