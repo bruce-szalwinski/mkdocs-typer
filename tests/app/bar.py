@@ -17,3 +17,11 @@ def hello(
     name: str = typer.Option(..., prompt="Your name", help="The person to greet."),
 ):
     """Simple program that greets NAME for a total of COUNT times."""
+
+
+@app.command()
+def goodbye(
+    count: int = typer.Option(default=1, help="Number of goodbyes.", show_default=False),
+    name: str = typer.Option(..., prompt="Your name", help="The person to greet."),
+):
+    """Simple program that says goodbye NAME for a total of COUNT times."""
