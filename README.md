@@ -92,6 +92,8 @@ When pointed at a group (or any other multi-command), `mkdocs-typer` will also g
 
 This allows you to generate documentation for an entire CLI application by pointing `mkdocs-typer` at the root command.
 
+Settings `sort` to `False` keeps the original definition order, which can be useful when documenting something that uses a particular order.
+
 ### Tweaking header levels
 
 By default, `mkdocs-typer` generates Markdown headers starting at `<h1>` for the root command section. This is generally what you want when the documentation should fill the entire page.
@@ -111,6 +113,7 @@ The syntax for `mkdocs-typer` blocks is the following:
     :module: <MODULE>
     :command: <COMMAND>
     :prog_name: <PROG_NAME>
+    :sort: <SORT>
     :depth: <DEPTH>
 ```
 
@@ -120,3 +123,4 @@ Options:
 - `command`: name of the command object.
 - `prog_name`: _(Optional, default: same as `command`)_ the name to display for the command.
 - `depth`: _(Optional, default: `0`)_ Offset to add when generating headers.
+- `sort`: _(Optional, default: `True`)_ Whether to sort commands or keep them in definition order.
