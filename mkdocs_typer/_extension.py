@@ -21,9 +21,17 @@ def replace_command_docs(**options: Any) -> Iterator[str]:
     prog_name = options.get("prog_name", command)
     depth = int(options.get("depth", 0))
 
+    sort_str = options.get("sort", "True")
+    if sort_str.lower() == "true":
+        sort = True
+    elif sort_str.lower() == "false":
+        sort = False
+    else:
+        raise MkDocsTyperException(f"{sort_str!r} is not a valid boolean. Expecting True or False.")
+
     command_obj = load_command(module, command)
 
-    return make_command_docs(prog_name=prog_name, command=command_obj, level=depth)
+    return make_command_docs(prog_name=prog_name, command=command_obj, level=depth, sort=sort)
 
 
 class TyperProcessor(Preprocessor):

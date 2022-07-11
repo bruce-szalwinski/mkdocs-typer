@@ -70,6 +70,41 @@ def test_depth():
     assert md.convert(source) == md.convert(expected)
 
 
+def test_sort_is_true_by_default():
+    """
+    The :sort: attribute allows the options to be displayed in the order they were defined in.
+    """
+    md = Markdown(extensions=[mkdocs_typer.makeExtension()])
+
+    source = dedent(
+        """
+        ::: mkdocs-typer
+            :module: tests.app.cli
+            :command: my_app
+            :sort: True
+        """
+    )
+    assert md.convert(source) == md.convert(EXPECTED)
+
+
+def test_sort():
+    """
+    The :sort: attribute allows the options to be displayed in the order they were defined in.
+    """
+    md = Markdown(extensions=[mkdocs_typer.makeExtension()])
+
+    source = dedent(
+        """
+        ::: mkdocs-typer
+            :module: tests.app.cli
+            :command: my_app
+            :sort: False
+        """
+    )
+    expected = (Path(__file__).parent / "app" / "expected_unsorted.md").read_text()
+    assert md.convert(source) == md.convert(expected)
+
+
 @pytest.mark.parametrize("option", ["module", "command"])
 def test_required_options(option):
     """
