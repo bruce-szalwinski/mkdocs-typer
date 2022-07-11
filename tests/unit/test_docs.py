@@ -96,3 +96,7 @@ def test_prog_name():
     output = "\n".join(make_command_docs("hello-world", app)).strip()
     assert output == HELLO_EXPECTED.replace("# hello", "# hello-world", 1)
 
+
+def test_no_sorting():
+    output = "\n".join(make_command_docs("hello", app, sort=False)).strip()
+    assert output == EXPECTED_FORMAT.format(first=HELLO_DOCS, second=GOODBYE_DOCS)

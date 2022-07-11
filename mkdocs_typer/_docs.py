@@ -9,15 +9,15 @@ from typer.main import get_command
 from ._exceptions import MkDocsTyperException
 
 
-def make_command_docs(prog_name: str, command: typer.main.Typer, level: int = 0) -> Iterator[str]:
+def make_command_docs(prog_name: str, command: typer.main.Typer, level: int = 0, sort: bool = True) -> Iterator[str]:
     """Create the Markdown lines for a command and its sub-commands."""
     cmd = get_command(command)
-    for line in _recursively_make_command_docs(prog_name, cmd, level=level):
+    for line in _recursively_make_command_docs(prog_name, cmd, level=level, sort=sort):
         yield line.replace("\b", "")
 
 
 def _recursively_make_command_docs(
-    prog_name: str, command: click.Command, parent: typer.Context = None, level: int = 0
+    prog_name: str, command: click.Command, parent: typer.Context = None, level: int = 0, sort: bool = True
 ) -> Iterator[str]:
     """Create the raw Markdown lines for a command and its sub-commands."""
     ctx = typer.Context(command, parent=parent)
@@ -29,8 +29,10 @@ def _recursively_make_command_docs(
 
     subcommands = _get_sub_commands(ctx.command, ctx)
 
-    for command in sorted(subcommands, key=lambda cmd: cmd.name):
-        yield from _recursively_make_command_docs(command.name, command, parent=ctx, level=level + 1)
+    if sort:
+       subcommands = sorted(subcommands, key=lambda cmd: cmd.name)
+    for command in subcommands:
+        yield from _recursively_make_command_docs(command.name, command, parent=ctx, level=level + 1, sort=sort)
 
 
 def _get_sub_commands(command: click.Command, ctx: typer.Context) -> List[click.Command]:
