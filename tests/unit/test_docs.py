@@ -15,16 +15,45 @@ def hello(debug: bool = typer.Option(False, "--debug/--no-debug", "-d", help="In
     """Hello, world!"""
 
 
+@app.command()
+def goodbye(debug: bool = typer.Option(False, "--debug/--no-debug", "-d", help="Include debug output")):
+    """Goodbye, world!"""
+
+
 HELLO_EXPECTED = dedent(
     """
     # hello
+
+    Usage:
+
+    ```
+     [OPTIONS] COMMAND [ARGS]...
+    ```
+
+    ## goodbye
+
+    Goodbye, world!
+
+    Usage:
+
+    ```
+     goodbye [OPTIONS]
+    ```
+
+    Options:
+
+    ```
+      -d, --debug / --no-debug  Include debug output  [default: no-debug]
+    ```
+
+    ## hello
 
     Hello, world!
 
     Usage:
 
     ```
-    hello [OPTIONS]
+     hello [OPTIONS]
     ```
 
     Options:
@@ -49,4 +78,4 @@ def test_depth():
 
 def test_prog_name():
     output = "\n".join(make_command_docs("hello-world", app)).strip()
-    assert output == HELLO_EXPECTED.replace("# hello", "# hello-world")
+    assert output == HELLO_EXPECTED.replace("# hello", "# hello-world", 1)
