@@ -30,7 +30,7 @@ def _recursively_make_command_docs(
     subcommands = _get_sub_commands(ctx.command, ctx)
 
     if sort:
-       subcommands = sorted(subcommands, key=lambda cmd: cmd.name)
+        subcommands = sorted(subcommands, key=lambda cmd: cmd.name)
     for command in subcommands:
         yield from _recursively_make_command_docs(command.name, command, parent=ctx, level=level + 1, sort=sort)
 
