@@ -30,7 +30,7 @@ HELLO_EXPECTED = dedent(
     Options:
 
     ```
-      -d, --debug / --no-debug  Include debug output  [default: False]
+      -d, --debug / --no-debug  Include debug output  [default: no-debug]
     ```
 
     """
