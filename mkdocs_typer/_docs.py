@@ -17,7 +17,7 @@ def make_command_docs(prog_name: str, command: typer.main.Typer, level: int = 0)
 
 
 def _recursively_make_command_docs(
-    prog_name: str, command: click.Command, parent: typer.Context = None, level: int = 0
+    prog_name: Optional[str], command: click.Command, parent: typer.Context = None, level: int = 0
 ) -> Iterator[str]:
     """Create the raw Markdown lines for a command and its sub-commands."""
     ctx = typer.Context(command, parent=parent)
@@ -29,7 +29,7 @@ def _recursively_make_command_docs(
 
     subcommands = _get_sub_commands(ctx.command, ctx)
 
-    for command in sorted(subcommands, key=lambda cmd: cmd.name):
+    for command in sorted(subcommands, key=lambda cmd: cmd.name if cmd.name else ""):
         yield from _recursively_make_command_docs(command.name, command, parent=ctx, level=level + 1)
 
 
@@ -45,13 +45,13 @@ def _get_sub_commands(command: click.Command, ctx: typer.Context) -> List[click.
         return []
 
 
-def _make_title(prog_name: str, level: int) -> Iterator[str]:
+def _make_title(prog_name: Optional[str], level: int) -> Iterator[str]:
     """Create the first markdown lines describing a command."""
     yield _make_header(prog_name, level)
     yield ""
 
 
-def _make_header(text: str, level: int) -> str:
+def _make_header(text: Optional[str], level: int) -> str:
     """Create a markdown header at a given level"""
     return f"{'#' * (level + 1)} {text}"
 
