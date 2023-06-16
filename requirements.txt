@@ -7,7 +7,7 @@ wheel
 # Linters
 black==23.3.0
 flake8==3.9.2
-mypy==0.782
+mypy==0.910
 importlib-metadata==4.13.0
 
 # Testing
