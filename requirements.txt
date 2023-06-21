@@ -7,10 +7,14 @@ wheel
 # Linters
 black==23.3.0
 flake8==3.9.2
-mypy==0.790
 importlib-metadata==4.13.0
+
+# Type checking
+mypy==0.950
+types-Markdown
+
 
 # Testing
 mock==4.0.2
-pytest==5.4.3
-pytest-cov==2.10.1
+pytest==7.1.2
+pytest-cov==3.0.0
